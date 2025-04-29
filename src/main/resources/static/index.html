@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Headers Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .redirect-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .redirect-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Header App</h1>
+        <div class="button-container">
+            <button class="redirect-button" onclick="redirectWithHeader()">View Headers</button>
+        </div>
+    </div>
+
+    <!-- <h2>Request Headers</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Header Name</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody id="request-headers-table"></tbody>
+    </table>
+
+    <h2>Response Headers</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Header Name</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody id="response-headers-table"></tbody>
+    </table> -->
+
+    <script>
+        // Set a test cookie
+        document.cookie = "testCookie=Hello from cookie!; path=/";
+
+        function redirectWithHeader() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/view-headers', true);
+            xhr.withCredentials = true;  // Enable sending cookies
+            xhr.setRequestHeader('sm_user', 'testUser');
+            xhr.setRequestHeader('user1', 'akash gahlot');
+            xhr.onload = function() {
+                document.open();
+                document.write(xhr.responseText);
+                document.close();
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
